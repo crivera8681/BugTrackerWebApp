@@ -8,11 +8,35 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Bug</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.BugType)
+            @Html.LabelFor(model => model.Id, "Bug Id", htmlAttributes: new { @class = "control-label" })
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.ReportDate, "Report Date", htmlAttributes: new { @class = "control-label" })
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReportDate)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.Email, "Reported By", htmlAttributes: new { @class = "control-label" })
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.BugType, "Bug Type", htmlAttributes: new { @class = "control-label" })
         </dt>
 
         <dd>
@@ -20,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BugDescription)
+            @Html.LabelFor(model => model.BugDescription, "Bug Description", htmlAttributes: new { @class = "control-label" })
         </dt>
 
         <dd>

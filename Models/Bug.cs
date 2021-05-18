@@ -13,6 +13,10 @@ namespace BugTrackerWebApp.Models
 
         public string BugDescription { get; set; }
 
+        public string Email { get; set; }
+
+        public DateTime ReportDate { get; set; }
+
         public Bug()
         {
 

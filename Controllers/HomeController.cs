@@ -15,14 +15,14 @@ namespace BugTrackerWebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Bug Tracker Application";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Carlos Rivera";
 
             return View();
         }

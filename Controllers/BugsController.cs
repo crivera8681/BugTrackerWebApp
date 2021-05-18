@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BugTrackerWebApp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BugTrackerWebApp.Controllers
 {
@@ -48,6 +49,8 @@ namespace BugTrackerWebApp.Controllers
         }
 
         // GET: Bugs/Create
+
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -56,12 +59,17 @@ namespace BugTrackerWebApp.Controllers
         // POST: Bugs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,BugType,BugDescription")] Bug bug)
+        public ActionResult Create([Bind(Include = "Id,BugType,BugDescription,Email,ReportDate")] Bug bug)
         {
             if (ModelState.IsValid)
             {
+                var userName = User.Identity.GetUserName();
+                bug.Email = userName;
+                bug.ReportDate = DateTime.Today;
                 db.Bugs.Add(bug);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,6 +79,8 @@ namespace BugTrackerWebApp.Controllers
         }
 
         // GET: Bugs/Edit/5
+
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,9 +98,10 @@ namespace BugTrackerWebApp.Controllers
         // POST: Bugs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,BugType,BugDescription")] Bug bug)
+        public ActionResult Edit([Bind(Include = "Id,BugType,BugDescription,Email,ReportDate")] Bug bug)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +113,8 @@ namespace BugTrackerWebApp.Controllers
         }
 
         // GET: Bugs/Delete/5
+
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +130,8 @@ namespace BugTrackerWebApp.Controllers
         }
 
         // POST: Bugs/Delete/5
+
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
