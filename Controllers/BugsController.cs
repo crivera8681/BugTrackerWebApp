@@ -67,9 +67,9 @@ namespace BugTrackerWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userName = User.Identity.GetUserName();
-                bug.Email = userName;
-                bug.ReportDate = DateTime.Today;
+                bug.Email = User.Identity.GetUserName();
+                bug.ReportDate = DateTime.Now;
+
                 db.Bugs.Add(bug);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -106,6 +106,8 @@ namespace BugTrackerWebApp.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(bug).State = EntityState.Modified;
+                bug.Email = User.Identity.GetUserName();
+                bug.ReportDate = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
